@@ -1,0 +1,12 @@
+*{
+    font-family:"Trebuchet MS", Tahoma, Verdana, Arial;
+}
+section{
+    text-align:center;
+}
+.oculto{
+    visibility:hidden;
+}
+input{
+    padding:4px;
+}
