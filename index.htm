@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Globant UI</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="e.css">
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $(".oculto").css("visibility","visible");
+                $(".alias").focus();
+                
+                $(".fname").click(function(){
+                    var enviar = $(".alias").val();
+                    $.ajax({
+                        url: "http://bootcamp.aws.af.cm/welcome/"+enviar,
+                        success: function(r){
+                            respuesta = r.response;
+                            respuesta = respuesta.replace(enviar, "<b>"+enviar+"</b>");
+                            document.getElementById("oculto").innerHTML = "<p>"+respuesta+"</p>";
+                        },
+                        error: function(e){
+                            console.log(e);
+                        }
+                    });
+                });
+                
+                $.ajax({
+                    url: "https://api.spotify.com/v1/search",
+                    dataType: "jsonp",
+                    jsonp: "callback",
+                    data: {
+                        q: "Rolling Stones",
+                        type: "album"
+                    },
+                    success: function(r){
+                        console.log(r);
+                    }
+                });
+            });
+            // http://learn.jquery.com/ajax/working-with-jsonp/
+            // http://api.jquery.com/jquery.getjson/
+            // https://github.com/globant-ui/html5bootcamp#extra-documentation
+        </script>
+    </head>
+    <body>
+        <section>
+            <link href="e.css" rel="stylesheet" type="text/css"/>
+            <p>Ingrese su nombre y será bienvenido</p>
+            <input type="text" class="alias" ><br /><br />
+            <input type="button" class="fname" name="fname" value="Activar">
+        </section>
+        <section class="oculto" id="oculto">
+            <p>Otra cosa mas.</p>
+        </section>
+    </body>
+</html>
