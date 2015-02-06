@@ -24,17 +24,22 @@
                         }
                     });
                 });
+
+		// comienza spotify
+		var iCantidadDeAlbums;
                 
                 $.ajax({
                     url: "https://api.spotify.com/v1/search",
-                    dataType: "jsonp",
-                    jsonp: "callback",
                     data: {
-                        q: "Rolling Stones",
-                        type: "album"
-                    },
+			            q: "Rolling stones",
+			            type: "album"
+			        },
                     success: function(r){
-                        console.log(r);
+                        console.log(r.albums);
+			iCantidadDeAlbums = r.albums.items.length;
+			for(i=0;i<iCantidadDeAlbums;i++){
+				
+			}
                     }
                 });
             });
@@ -53,5 +58,8 @@
         <section class="oculto" id="oculto">
             <p>Otra cosa mas.</p>
         </section>
+	<section id="spotify">
+		
+	</section>
     </body>
 </html>
