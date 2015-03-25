@@ -7,6 +7,8 @@
         <link rel="stylesheet" type="text/css" href="e.css">
         <script type="text/javascript">
             $(document).ready(function(){
+                var iCantidadDeAlbums, aAlbums, htmlSpotify;
+                htmlSpotify = document.getElementById("spotify");
                 $(".oculto").css("visibility","visible");
                 $(".alias").focus();
                 
@@ -26,19 +28,22 @@
                 });
 
 		// comienza spotify
-		var iCantidadDeAlbums;
+		
                 
                 $.ajax({
                     url: "https://api.spotify.com/v1/search",
                     data: {
-			            q: "Rolling stones",
-			            type: "album"
-			        },
+			q: "Rolling stones",
+			type: "album"
+			},
                     success: function(r){
                         console.log(r.albums);
 			iCantidadDeAlbums = r.albums.items.length;
+                        aAlbums = r.albums.items;
+                        htmlSpotify.innerHTML = "";
+                        console.log(aAlbums[0].album_type);
 			for(i=0;i<iCantidadDeAlbums;i++){
-				
+				htmlSpotify.innerHTML = htmlSpotify.innerHTML+"<article><img src ='"+aAlbums[i].images[1].url+"'><br /><p>Name: "+aAlbums[i].name+"</p><p>Type: "+aAlbums[i].album_type+"</p><p><a href='https://play.spotify.com/album/"+aAlbums[i].id+"' target=blank>Link</a></p></article>";
 			}
                     }
                 });
@@ -59,7 +64,7 @@
             <p>Otra cosa mas.</p>
         </section>
 	<section id="spotify">
-		
+		<img src="loading18.gif" id="loading" />
 	</section>
     </body>
 </html>
